@@ -23,7 +23,7 @@ Maven build:
 
 Example call:
 
- find -iname *.class | java -jar ~/.../target/CKJM-1.0-SNAPSHOT-jar-with-dependencies.jar -i -t CSV > /tmp/project.csv
+ find -iname *.class | java -jar ~/.../target/CKJM-1.10-SNAPSHOT-jar-with-dependencies.jar -i -t CSV > /tmp/project.csv
 
 Command line options:
 
