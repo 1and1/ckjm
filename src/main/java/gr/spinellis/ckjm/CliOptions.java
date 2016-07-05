@@ -84,7 +84,7 @@ public class CliOptions {
         return files != null ? files : Collections.emptyList();
     }
 
-    public OutputType getOutputType() {
+    OutputType getOutputType() {
         return outputType;
     }
 
