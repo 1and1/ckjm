@@ -12,11 +12,17 @@ In addition it also calculates for each class
 * Ca: Afferent couplings
 * NPM: Number of public methods
 
-This is a fork that adds Args4j command line options for easier invocation and
-CSV output for number crunching with Excel.
+This is a fork that adds
+* A Maven driven build because I had some problems with the prior Ant building.
+* Args4j command line options for easier invocation, and
+* CSV output for number crunching with Excel.
+
+Maven build:
+
+$ mvn clean package
 
 Command line options:
-java -jar target/CKJM-1.0-SNAPSHOT-jar-with-dependencies.jar 
+
  -h (--help)                     : Show this help message.
  -i (--use-stdin)                : Read class paths from standard input instead
                                    of adding them in the command line arguments.
