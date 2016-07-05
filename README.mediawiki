@@ -19,7 +19,11 @@ This is a fork that adds
 
 Maven build:
 
-$ mvn clean package
+ $ mvn clean package
+
+Example call:
+
+ find -iname *.class | java -jar ~/git/ckjm/target/CKJM-1.0-SNAPSHOT-jar-with-dependencies.jar -i -t CSV > /tmp/sams.csv
 
 Command line options:
 
