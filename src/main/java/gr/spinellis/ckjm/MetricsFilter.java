@@ -116,7 +116,10 @@ public class MetricsFilter {
 	for (String file : myOptions.getFiles())
 	    processClass(cm, file);
 
-	CkjmOutputHandler handler = myOptions.getOutputType().getInstance(System.out);
+	CkjmOutputHandler handler = myOptions.getOutputType().getInstance(System.out
+    );
+    handler.printHeader();
 	cm.printMetrics(handler);
+    handler.printFooter();
     }
 }

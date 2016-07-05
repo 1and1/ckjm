@@ -22,7 +22,7 @@ import java.io.PrintStream;
  * @author Julien Rentrop
  */
 public class PrintPlainResults implements CkjmOutputHandler {
-    private PrintStream p;
+    private final PrintStream p;
 
     public PrintPlainResults (PrintStream p) {
         this.p = p;
@@ -30,5 +30,13 @@ public class PrintPlainResults implements CkjmOutputHandler {
 
     public void handleClass(String name, ClassMetrics c) {
         p.println(name + " " + c.toString());
+    }
+
+    @Override
+    public void printHeader() {
+    }
+
+    @Override
+    public void printFooter() {
     }
 }

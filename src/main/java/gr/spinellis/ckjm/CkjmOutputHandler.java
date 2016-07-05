@@ -25,10 +25,17 @@ package gr.spinellis.ckjm;
  * @author Julien Rentrop
  */
 public interface CkjmOutputHandler {
+    
+    /** Print the start of the file. */
+    void printHeader();
+        
     /**
      * Method called when metrics are generated
      * @param name Name of the class
      * @param c Value object that contains the corresponding metrics
      */
     void handleClass(String name, ClassMetrics c);
+    
+    /** Print the end of the file. */
+    void printFooter();
 }

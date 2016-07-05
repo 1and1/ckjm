@@ -1,12 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ /*
+ * (C) Copyright 2016 Stephan Fuhrmann
+ *
+ * Permission to use, copy, and distribute this software and its documentation
+ * for any purpose and without fee is hereby granted, provided that the above
+ * copyright notice appear in all copies and that both that copyright notice and
+ * this permission notice appear in supporting documentation.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
 package gr.spinellis.ckjm;
 
 import gr.spinellis.ckjm.ant.PrintXmlResults;
-import java.io.File;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +24,7 @@ import org.kohsuke.args4j.Option;
 
 /**
  * Command line options.
- * @author stephan
+ * @author Stephan Fuhrmann
  */
 public class CliOptions {
     
@@ -32,7 +38,7 @@ public class CliOptions {
     private boolean  stdIn = false;
     
     @Option(name = "-t", aliases = {"--type"}, usage = "Output format to use.")
-    private OutputType outputType = OutputType.Plain;
+    private OutputType outputType = OutputType.PLAIN;
     
     @Option(name = "-h", aliases = {"--help"}, usage = "Show this help message.", help = true)
     private boolean help;
@@ -41,8 +47,9 @@ public class CliOptions {
     private List<String> files;
     
     enum OutputType {
-        Xml(ps -> new PrintXmlResults(ps)),
-        Plain(ps -> new PrintPlainResults(ps));
+        XML(ps -> new PrintXmlResults(ps)),
+        CSV(ps -> new PrintCSVResults(ps)),
+        PLAIN(ps -> new PrintPlainResults(ps));
         
         private final Function<PrintStream, CkjmOutputHandler> func;
 
