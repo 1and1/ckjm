@@ -36,37 +36,37 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     /**
      * The class being visited.
      */
-    private JavaClass visitedClass;
+    private final JavaClass visitedClass;
     /**
      * The class's constant pool.
      */
-    private ConstantPoolGen cp;
+    private final ConstantPoolGen cp;
     /**
      * The class's fully qualified name.
      */
-    private String myClassName;
+    private final String myClassName;
     /**
      * The container where metrics for all classes are stored.
      */
-    private ClassMetricsContainer cmap;
+    private final ClassMetricsContainer cmap;
     /**
      * The emtrics for the class being visited.
      */
-    private ClassMetrics cm;
+    private final ClassMetrics cm;
     /* Classes encountered.
      * Its cardinality is used for calculating the CBO.
      */
-    private HashSet<String> efferentCoupledClasses = new HashSet<String>();
+    private final Set<String> efferentCoupledClasses = new HashSet<>();
     /**
      * Methods encountered. Its cardinality is used for calculating the RFC.
      */
-    private HashSet<String> responseSet = new HashSet<String>();
+    private final Set<String> responseSet = new HashSet<>();
     /**
      * Use of fields in methods. Its contents are used for calculating the LCOM.
      * We use a Tree rather than a Hash to calculate the intersection in O(n)
      * instead of O(n*n).
      */
-    ArrayList<TreeSet<String>> mi = new ArrayList<TreeSet<String>>();
+    List<TreeSet<String>> mi = new ArrayList<>();
 
     public ClassVisitor(JavaClass jc, ClassMetricsContainer classMap) {
         visitedClass = jc;
@@ -90,6 +90,7 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     /**
      * Calculate the class's metrics based on its elements.
      */
+    @Override
     public void visitJavaClass(JavaClass jc) {
         String super_name = jc.getSuperclassName();
         String package_name = jc.getPackageName();
@@ -161,6 +162,7 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     /**
      * Called when a field access is encountered.
      */
+    @Override
     public void visitField(Field field) {
         registerCoupling(field.getType());
     }
@@ -180,6 +182,7 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
     /**
      * Called when a method invocation is encountered.
      */
+    @Override
     public void visitMethod(Method method) {
         MethodGen mg = new MethodGen(method, visitedClass.getClassName(), cp);
 
@@ -212,8 +215,6 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
      * Return a class name associated with a type.
      */
     static String className(Type t) {
-        String ts = t.toString();
-
         if (t.getType() <= Constants.T_VOID) {
             return "java.PRIMITIVE";
         } else if (t instanceof ArrayType) {
@@ -242,7 +243,7 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
                 /* A shallow unknown-type copy is enough */
                 TreeSet<?> intersection = (TreeSet<?>) mi.get(i).clone();
                 intersection.retainAll(mi.get(j));
-                if (intersection.size() == 0) {
+                if (intersection.isEmpty()) {
                     lcom++;
                 } else {
                     lcom--;

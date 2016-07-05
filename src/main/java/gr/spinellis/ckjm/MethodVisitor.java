@@ -31,17 +31,17 @@ class MethodVisitor extends EmptyVisitor {
     /**
      * Method generation template.
      */
-    private MethodGen mg;
+    private final MethodGen mg;
     /* The class's constant pool. */
-    private ConstantPoolGen cp;
+    private final ConstantPoolGen cp;
     /**
      * The visitor of the class the method visitor is in.
      */
-    private ClassVisitor cv;
+    private final ClassVisitor cv;
     /**
      * The metrics of the class the method visitor is in.
      */
-    private ClassMetrics cm;
+    private final ClassMetrics cm;
 
     /**
      * Constructor.
@@ -84,6 +84,7 @@ class MethodVisitor extends EmptyVisitor {
     /**
      * Local variable use.
      */
+    @Override
     public void visitLocalVariableInstruction(LocalVariableInstruction i) {
         if (i.getOpcode() != Constants.IINC) {
             cv.registerCoupling(i.getType(cp));
@@ -93,6 +94,7 @@ class MethodVisitor extends EmptyVisitor {
     /**
      * Array use.
      */
+    @Override
     public void visitArrayInstruction(ArrayInstruction i) {
         cv.registerCoupling(i.getType(cp));
     }
@@ -100,6 +102,7 @@ class MethodVisitor extends EmptyVisitor {
     /**
      * Field access.
      */
+    @Override
     public void visitFieldInstruction(FieldInstruction i) {
         cv.registerFieldAccess(i.getClassName(cp), i.getFieldName(cp));
         cv.registerCoupling(i.getFieldType(cp));
@@ -108,6 +111,7 @@ class MethodVisitor extends EmptyVisitor {
     /**
      * Method invocation.
      */
+    @Override
     public void visitInvokeInstruction(InvokeInstruction i) {
         Type[] argTypes = i.getArgumentTypes(cp);
         for (int j = 0; j < argTypes.length; j++) {
@@ -121,6 +125,7 @@ class MethodVisitor extends EmptyVisitor {
     /**
      * Visit an instanceof instruction.
      */
+    @Override
     public void visitINSTANCEOF(INSTANCEOF i) {
         cv.registerCoupling(i.getType(cp));
     }
@@ -128,6 +133,7 @@ class MethodVisitor extends EmptyVisitor {
     /**
      * Visit checklast instruction.
      */
+    @Override
     public void visitCHECKCAST(CHECKCAST i) {
         cv.registerCoupling(i.getType(cp));
     }
@@ -135,6 +141,7 @@ class MethodVisitor extends EmptyVisitor {
     /**
      * Visit return instruction.
      */
+    @Override
     public void visitReturnInstruction(ReturnInstruction i) {
         cv.registerCoupling(i.getType(cp));
     }
@@ -146,8 +153,8 @@ class MethodVisitor extends EmptyVisitor {
         CodeExceptionGen[] handlers = mg.getExceptionHandlers();
 
         /* Measuring decision: couple exceptions */
-        for (int i = 0; i < handlers.length; i++) {
-            Type t = handlers[i].getCatchType();
+        for (CodeExceptionGen handler : handlers) {
+            Type t = handler.getCatchType();
             if (t != null) {
                 cv.registerCoupling(t);
             }

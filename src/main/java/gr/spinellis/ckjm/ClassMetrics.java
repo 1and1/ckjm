@@ -16,6 +16,7 @@
 package gr.spinellis.ckjm;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Store details needed for calculating a class's Chidamber-Kemerer metrics.
@@ -67,7 +68,7 @@ public class ClassMetrics {
     /**
      * Coupled classes: classes that use this class
      */
-    private HashSet<String> afferentCoupledClasses;
+    private final Set<String> afferentCoupledClasses;
 
     /**
      * Default constructor.
@@ -78,7 +79,7 @@ public class ClassMetrics {
         cbo = 0;
         npm = 0;
         visited = false;
-        afferentCoupledClasses = new HashSet<String>();
+        afferentCoupledClasses = new HashSet<>();
     }
 
     /**

@@ -81,7 +81,7 @@ public class CkjmTask extends MatchingTask {
     /**
      * Sets the extension directories that will be used by ckjm.
      *
-     * @param extdirs a path containing .jar files
+     * @param e a path containing .jar files
      */
     public void setExtdirs(Path e) {
         if (extdirs == null) {
@@ -119,6 +119,7 @@ public class CkjmTask extends MatchingTask {
      *
      * @throws BuildException if an error occurs.
      */
+    @Override
     public void execute() throws BuildException {
         if (classDir == null) {
             throw new BuildException("classdir attribute must be set!");
@@ -150,8 +151,7 @@ public class CkjmTask extends MatchingTask {
                 files[i] = classDir.getPath() + File.separatorChar + files[i];
             }
 
-            try {
-                OutputStream outputStream = new FileOutputStream(outputFile);
+            try (OutputStream outputStream = new FileOutputStream(outputFile)) {
 
                 if (format.equals("xml")) {
                     PrintXmlResults outputXml = new PrintXmlResults(
@@ -166,7 +166,6 @@ public class CkjmTask extends MatchingTask {
                     MetricsFilter.runMetrics(files, outputPlain);
                 }
 
-                outputStream.close();
 
             } catch (IOException ioe) {
                 throw new BuildException("Error file handling: "

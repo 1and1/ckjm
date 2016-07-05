@@ -26,17 +26,19 @@ import java.io.PrintStream;
  */
 public class PrintXmlResults implements CkjmOutputHandler {
 
-    private PrintStream p;
+    private final PrintStream p;
 
     public PrintXmlResults(PrintStream p) {
         this.p = p;
     }
 
+    @Override
     public void printHeader() {
         p.println("<?xml version=\"1.0\"?>");
         p.println("<ckjm>");
     }
 
+    @Override
     public void handleClass(String name, ClassMetrics c) {
         p.print("<class>\n"
             + "<name>" + name + "</name>\n"
@@ -51,6 +53,7 @@ public class PrintXmlResults implements CkjmOutputHandler {
             + "</class>\n");
     }
 
+    @Override
     public void printFooter() {
         p.println("</ckjm>");
     }

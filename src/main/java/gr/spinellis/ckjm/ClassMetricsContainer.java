@@ -31,7 +31,7 @@ class ClassMetricsContainer {
     /**
      * The map from class names to the corresponding metrics
      */
-    private HashMap<String, ClassMetrics> m = new HashMap<String, ClassMetrics>();
+    private final Map<String, ClassMetrics> m = new HashMap<>();
 
     /**
      * Return a class's metrics
