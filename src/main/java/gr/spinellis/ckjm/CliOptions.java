@@ -14,6 +14,7 @@ package gr.spinellis.ckjm;
 
 import gr.spinellis.ckjm.ant.PrintXmlResults;
 import java.io.PrintStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
@@ -80,7 +81,7 @@ public class CliOptions {
     }
 
     public List<String> getFiles() {
-        return files;
+        return files != null ? files : Collections.emptyList();
     }
 
     public OutputType getOutputType() {
@@ -99,7 +100,7 @@ public class CliOptions {
                 return null;
             }
 
-            if (result.getFiles() == null && !result.isStdIn()) {
+            if (result.getFiles().isEmpty() && !result.isStdIn()) {
                 parser.printUsage(System.err);
                 return null;
             }
