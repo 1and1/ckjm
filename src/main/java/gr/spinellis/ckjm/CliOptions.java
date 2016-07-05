@@ -35,7 +35,7 @@ public class CliOptions {
     @Option(name = "-j", aliases = {"--include-jdk-classes"}, usage = "True if the measurements should include calls to the Java JDK into account.")
     private boolean includeJdkClasses = false;
 
-    @Option(name = "-i", aliases = {"--use-stdin"}, usage = "Read class source from standard input.")
+    @Option(name = "-i", aliases = {"--use-stdin"}, usage = "Read class paths from standard input instead of adding them in the command line arguments.")
     private boolean stdIn = false;
 
     @Option(name = "-t", aliases = {"--type"}, usage = "Output format to use.")
@@ -44,7 +44,7 @@ public class CliOptions {
     @Option(name = "-h", aliases = {"--help"}, usage = "Show this help message.", help = true)
     private boolean help;
 
-    @Argument(metaVar = "CLASS-OR-JAR")
+    @Argument(metaVar = "CLASS-OR-JAR-SPACE-CLASS")
     private List<String> files;
 
     enum OutputType {
