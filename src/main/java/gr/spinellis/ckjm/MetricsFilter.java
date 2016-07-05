@@ -17,12 +17,7 @@
 package gr.spinellis.ckjm;
 
 import org.apache.bcel.classfile.*;
-import org.apache.bcel.generic.*;
-import org.apache.bcel.Repository;
-import org.apache.bcel.Constants;
-import org.apache.bcel.util.*;
 import java.io.*;
-import java.util.*;
 
 /**
  * Convert a list of classes into their metrics.
