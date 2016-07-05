@@ -13,7 +13,6 @@
  * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
  * MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 package gr.spinellis.ckjm.ant;
 
 import gr.spinellis.ckjm.MetricsFilter;
@@ -37,6 +36,7 @@ import org.apache.tools.ant.types.Path;
  * @author Julien Rentrop
  */
 public class CkjmTask extends MatchingTask {
+
     private File outputFile;
 
     private File classDir;
@@ -52,9 +52,8 @@ public class CkjmTask extends MatchingTask {
     /**
      * Sets the format of the output file.
      *
-     * @param format
-     *            the format of the output file. Allowable values are 'plain' or
-     *            'xml'.
+     * @param format the format of the output file. Allowable values are 'plain'
+     * or 'xml'.
      */
     public void setFormat(String format) {
         this.format = format;
@@ -64,8 +63,7 @@ public class CkjmTask extends MatchingTask {
     /**
      * Sets the outputfile
      *
-     * @param outputfile
-     *            Location of outputfile
+     * @param outputfile Location of outputfile
      */
     public void setOutputfile(File outputfile) {
         this.outputFile = outputfile;
@@ -74,8 +72,7 @@ public class CkjmTask extends MatchingTask {
     /**
      * Sets the dir which contains the class files that will be analyzed
      *
-     * @param classDir
-     *            Location of class files
+     * @param classDir Location of class files
      */
     public void setClassdir(File classDir) {
         this.classDir = classDir;
@@ -83,6 +80,7 @@ public class CkjmTask extends MatchingTask {
 
     /**
      * Sets the extension directories that will be used by ckjm.
+     *
      * @param extdirs a path containing .jar files
      */
     public void setExtdirs(Path e) {
@@ -95,6 +93,7 @@ public class CkjmTask extends MatchingTask {
 
     /**
      * Gets the extension directories that will be used by ckjm.
+     *
      * @return the extension directories as a path
      */
     public Path getExtdirs() {
@@ -103,6 +102,7 @@ public class CkjmTask extends MatchingTask {
 
     /**
      * Adds a path to extdirs.
+     *
      * @return a path to be modified
      */
     public Path createExtdirs() {
@@ -117,8 +117,7 @@ public class CkjmTask extends MatchingTask {
      * tool to a file. When XML format is used it will buffer the output and
      * translate it to the XML format.
      *
-     * @throws BuildException
-     *             if an error occurs.
+     * @throws BuildException if an error occurs.
      */
     public void execute() throws BuildException {
         if (classDir == null) {
@@ -131,14 +130,15 @@ public class CkjmTask extends MatchingTask {
             throw new BuildException("classdir is not a directory!");
         }
 
-	if (extdirs != null && extdirs.size() > 0) {
-	    if (System.getProperty("java.ext.dirs").length() == 0)
-		System.setProperty("java.ext.dirs", extdirs.toString());
-	    else
-		System.setProperty("java.ext.dirs",
-		    System.getProperty("java.ext.dirs") + File.pathSeparator +
-		    extdirs);
-	}
+        if (extdirs != null && extdirs.size() > 0) {
+            if (System.getProperty("java.ext.dirs").length() == 0) {
+                System.setProperty("java.ext.dirs", extdirs.toString());
+            } else {
+                System.setProperty("java.ext.dirs",
+                    System.getProperty("java.ext.dirs") + File.pathSeparator
+                    + extdirs);
+            }
+        }
 
         DirectoryScanner ds = super.getDirectoryScanner(classDir);
 
@@ -155,14 +155,14 @@ public class CkjmTask extends MatchingTask {
 
                 if (format.equals("xml")) {
                     PrintXmlResults outputXml = new PrintXmlResults(
-                            new PrintStream(outputStream));
+                        new PrintStream(outputStream));
 
                     outputXml.printHeader();
                     MetricsFilter.runMetrics(files, outputXml);
                     outputXml.printFooter();
                 } else {
                     PrintPlainResults outputPlain = new PrintPlainResults(
-                            new PrintStream(outputStream));
+                        new PrintStream(outputStream));
                     MetricsFilter.runMetrics(files, outputPlain);
                 }
 
@@ -170,7 +170,7 @@ public class CkjmTask extends MatchingTask {
 
             } catch (IOException ioe) {
                 throw new BuildException("Error file handling: "
-                        + ioe.getMessage());
+                    + ioe.getMessage());
             }
         }
     }

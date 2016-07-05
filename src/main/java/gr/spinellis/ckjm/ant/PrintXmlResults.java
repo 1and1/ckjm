@@ -25,6 +25,7 @@ import java.io.PrintStream;
  * @author Julien Rentrop
  */
 public class PrintXmlResults implements CkjmOutputHandler {
+
     private PrintStream p;
 
     public PrintXmlResults(PrintStream p) {
@@ -37,20 +38,20 @@ public class PrintXmlResults implements CkjmOutputHandler {
     }
 
     public void handleClass(String name, ClassMetrics c) {
-        p.print("<class>\n" +
-                "<name>" + name + "</name>\n" +
-                "<wmc>" + c.getWmc() + "</wmc>\n" +
-                "<dit>" + c.getDit() + "</dit>\n" +
-                "<noc>" + c.getNoc() + "</noc>\n" +
-                "<cbo>" + c.getCbo() + "</cbo>\n" +
-                "<rfc>" + c.getRfc() + "</rfc>\n" +
-                "<lcom>" + c.getLcom() + "</lcom>\n" +
-                "<ca>" + c.getCa() + "</ca>\n" +
-                "<npm>" + c.getNpm() + "</npm>\n" +
-                "</class>\n");
+        p.print("<class>\n"
+            + "<name>" + name + "</name>\n"
+            + "<wmc>" + c.getWmc() + "</wmc>\n"
+            + "<dit>" + c.getDit() + "</dit>\n"
+            + "<noc>" + c.getNoc() + "</noc>\n"
+            + "<cbo>" + c.getCbo() + "</cbo>\n"
+            + "<rfc>" + c.getRfc() + "</rfc>\n"
+            + "<lcom>" + c.getLcom() + "</lcom>\n"
+            + "<ca>" + c.getCa() + "</ca>\n"
+            + "<npm>" + c.getNpm() + "</npm>\n"
+            + "</class>\n");
     }
 
-    public void printFooter () {
+    public void printFooter() {
         p.println("</ckjm>");
     }
 }

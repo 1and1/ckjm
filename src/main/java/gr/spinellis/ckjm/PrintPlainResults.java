@@ -12,19 +12,20 @@
  * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
  * MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 package gr.spinellis.ckjm;
 
 import java.io.PrintStream;
 
 /**
  * Simple plain text output formatter
+ *
  * @author Julien Rentrop
  */
 public class PrintPlainResults implements CkjmOutputHandler {
+
     private final PrintStream p;
 
-    public PrintPlainResults (PrintStream p) {
+    public PrintPlainResults(PrintStream p) {
         this.p = p;
     }
 

@@ -1,4 +1,4 @@
- /*
+/*
  * (C) Copyright 2016 Stephan Fuhrmann
  *
  * Permission to use, copy, and distribute this software and its documentation
@@ -24,39 +24,40 @@ import org.kohsuke.args4j.Option;
 
 /**
  * Command line options.
+ *
  * @author Stephan Fuhrmann
  */
 public class CliOptions {
-    
+
     @Option(name = "-p", aliases = {"--only-public"}, usage = "True if the reports should only include public classes.")
     private boolean onlyPublic = false;
-    
+
     @Option(name = "-j", aliases = {"--include-jdk-classes"}, usage = "True if the measurements should include calls to the Java JDK into account.")
-    private boolean  includeJdkClasses = false;
-    
+    private boolean includeJdkClasses = false;
+
     @Option(name = "-i", aliases = {"--use-stdin"}, usage = "Read class source from standard input.")
-    private boolean  stdIn = false;
-    
+    private boolean stdIn = false;
+
     @Option(name = "-t", aliases = {"--type"}, usage = "Output format to use.")
     private OutputType outputType = OutputType.PLAIN;
-    
+
     @Option(name = "-h", aliases = {"--help"}, usage = "Show this help message.", help = true)
     private boolean help;
-    
+
     @Argument(metaVar = "CLASS-OR-JAR")
     private List<String> files;
-    
+
     enum OutputType {
         XML(ps -> new PrintXmlResults(ps)),
         CSV(ps -> new PrintCSVResults(ps)),
         PLAIN(ps -> new PrintPlainResults(ps));
-        
+
         private final Function<PrintStream, CkjmOutputHandler> func;
 
         private OutputType(Function<PrintStream, CkjmOutputHandler> func) {
             this.func = func;
         }
-        
+
         public CkjmOutputHandler getInstance(PrintStream s) {
             return func.apply(s);
         }
@@ -85,24 +86,24 @@ public class CliOptions {
     public OutputType getOutputType() {
         return outputType;
     }
-    
+
     public static CliOptions create(String[] args) {
         Objects.requireNonNull(args);
         try {
             CliOptions result = new CliOptions();
             CmdLineParser parser = new CmdLineParser(result);
             parser.parseArgument(args);
-            
+
             if (result.isHelp()) {
                 parser.printUsage(System.err);
-                return null;           
+                return null;
             }
-            
+
             if (result.getFiles() == null && !result.isStdIn()) {
                 parser.printUsage(System.err);
-                return null;                           
+                return null;
             }
-            
+
             return result;
         } catch (CmdLineException ex) {
             System.err.println(ex.getMessage());

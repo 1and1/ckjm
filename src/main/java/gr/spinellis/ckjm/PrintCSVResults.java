@@ -10,7 +10,6 @@
  * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
  * MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 package gr.spinellis.ckjm;
 
 import java.io.IOException;
@@ -20,12 +19,14 @@ import org.apache.commons.csv.CSVPrinter;
 
 /**
  * CSV text output formatter
+ *
  * @author Stephan Fuhrmann
  */
 public class PrintCSVResults implements CkjmOutputHandler {
+
     private final CSVPrinter printer;
 
-    public PrintCSVResults (PrintStream p) {
+    public PrintCSVResults(PrintStream p) {
         try {
             printer = CSVFormat.EXCEL.withHeader("Classname", "CA", "CBO", "DIT", "LCOM", "NOC", "NPM", "RFC", "WMC").print(p);
         } catch (IOException ex) {
