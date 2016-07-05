@@ -33,16 +33,14 @@ import java.io.*;
  * @author <a href="http://www.spinellis.gr">Diomidis Spinellis</a>
  */
 public class MetricsFilter {
-    /** True if the measurements should include calls to the Java JDK into account */
-    private static boolean includeJdk = false;
 
-    /** True if the reports should only include public classes */
-    private static boolean onlyPublic = false;
-
+    /** The parsed command line options. */
+    private static CliOptions options;
+    
     /** Return true if the measurements should include calls to the Java JDK into account */
-    public static boolean isJdkIncluded() { return includeJdk; }
+    public static boolean isJdkIncluded() { return options.isIncludeJdkClasses(); }
     /** Return true if the measurements should include all classes */
-    public static boolean includeAll() { return !onlyPublic; }
+    public static boolean includeAll() { return !options.isOnlyPublic(); }
 
     /**
      * Load and parse the specified class.
@@ -94,19 +92,16 @@ public class MetricsFilter {
      * Process command line arguments and the standard input.
      */
     public static void main(String[] argv) {
-	int argp = 0;
+    CliOptions myOptions = CliOptions.create(argv);
+    if (myOptions == null) {
+        System.exit(1);
+    }
+    
+    options = myOptions;
 
-	if (argv.length > argp && argv[argp].equals("-s")) {
-	    includeJdk = true;
-	    argp++;
-	}
-	if (argv.length > argp && argv[argp].equals("-p")) {
-	    onlyPublic = true;
-	    argp++;
-	}
 	ClassMetricsContainer cm = new ClassMetricsContainer();
 
-	if (argv.length == argp) {
+	if (myOptions.isStdIn()) {
 	    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	    try {
 		String s;
@@ -118,10 +113,10 @@ public class MetricsFilter {
 	    }
 	}
 
-	for (int i = argp; i < argv.length; i++)
-	    processClass(cm, argv[i]);
+	for (String file : myOptions.getFiles())
+	    processClass(cm, file);
 
-	CkjmOutputHandler handler = new PrintPlainResults(System.out);
+	CkjmOutputHandler handler = myOptions.getOutputType().getInstance(System.out);
 	cm.printMetrics(handler);
     }
 }
