@@ -13,7 +13,7 @@ In addition it also calculates for each class
 * NPM: Number of public methods
 
 This is a fork that adds
-* A Maven driven build because I had some problems with the prior Ant building.
+* A Maven driven build because I had some problems with the prior Ant building,
 * Args4j command line options for easier invocation, and
 * CSV output for number crunching with Excel.
 
