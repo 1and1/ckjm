@@ -319,9 +319,11 @@ public class ClassMetrics {
         if (this.isPublicClass != other.isPublicClass) {
             return false;
         }
+        /*
         if (!Objects.equals(this.afferentCoupledClasses, other.afferentCoupledClasses)) {
             return false;
         }
+        */
         return true;
     }
     
