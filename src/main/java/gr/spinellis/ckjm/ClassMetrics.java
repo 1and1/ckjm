@@ -16,6 +16,7 @@
 package gr.spinellis.ckjm;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -80,6 +81,19 @@ public class ClassMetrics {
         npm = 0;
         visited = false;
         afferentCoupledClasses = new HashSet<>();
+    }
+    
+    public ClassMetrics(int wmc, int dit, int noc, int cbo, int rfc, int lcom, Set<String> afferentCoupledClasses, int npm, boolean visited, boolean isPublicClass) {
+        this.wmc = wmc;
+        this.noc = noc;
+        this.rfc = rfc;
+        this.cbo = cbo;
+        this.dit = dit;
+        this.lcom = lcom;
+        this.npm = npm;
+        this.visited = visited;
+        this.isPublicClass = isPublicClass;
+        this.afferentCoupledClasses = afferentCoupledClasses;
     }
 
     /**
@@ -249,4 +263,67 @@ public class ClassMetrics {
     public boolean isVisited() {
         return visited;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 17 * hash + this.wmc;
+        hash = 17 * hash + this.noc;
+        hash = 17 * hash + this.rfc;
+        hash = 17 * hash + this.cbo;
+        hash = 17 * hash + this.dit;
+        hash = 17 * hash + this.lcom;
+        hash = 17 * hash + this.npm;
+        hash = 17 * hash + (this.visited ? 1 : 0);
+        hash = 17 * hash + (this.isPublicClass ? 1 : 0);
+        hash = 17 * hash + Objects.hashCode(this.afferentCoupledClasses);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ClassMetrics other = (ClassMetrics) obj;
+        if (this.wmc != other.wmc) {
+            return false;
+        }
+        if (this.noc != other.noc) {
+            return false;
+        }
+        if (this.rfc != other.rfc) {
+            return false;
+        }
+        if (this.cbo != other.cbo) {
+            return false;
+        }
+        if (this.dit != other.dit) {
+            return false;
+        }
+        if (this.lcom != other.lcom) {
+            return false;
+        }
+        if (this.npm != other.npm) {
+            return false;
+        }
+        if (this.visited != other.visited) {
+            return false;
+        }
+        if (this.isPublicClass != other.isPublicClass) {
+            return false;
+        }
+        if (!Objects.equals(this.afferentCoupledClasses, other.afferentCoupledClasses)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
