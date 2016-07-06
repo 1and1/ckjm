@@ -105,6 +105,7 @@ public class MetricsFilterTest {
     public void testTest3() throws IOException {
         testResultsMatch("Test3 2 1 0 1 4 1 0 0", "samples/Test3.class");
     }
+
     @Test
     public void testTest2() throws IOException {
         testResultsMatch("Test2 1 1 0 1 2 0 0 0", "samples/Test2.class");
