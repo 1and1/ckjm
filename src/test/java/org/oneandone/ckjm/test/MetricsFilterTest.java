@@ -73,40 +73,40 @@ public class MetricsFilterTest {
     }
     
     @Test
-    public void test1() throws IOException {
+    public void testTest() throws IOException {
         testResultsMatch("Test 3 1 1 0 7 1 6 0", "samples/Test.class");
     }
     @Test
-    public void test2() throws IOException {
+    public void testSSTest() throws IOException {
         testResultsMatch("SSTest 1 0 0 1 2 0 1 0", "samples/SSTest.class");
     }
     @Test
-    public void test3() throws IOException {
+    public void testTest7() throws IOException {
         testResultsMatch("Test7 2 1 0 1 3 1 0 1", "samples/Test7.class");
     }
     @Test
-    public void test4() throws IOException {
+    public void testTest6() throws IOException {
         testResultsMatch("Test6 2 1 0 1 3 1 0 0", "samples/Test6.class");
     }
     @Test
-    public void test5() throws IOException {
+    public void testSTest() throws IOException {
         testResultsMatch("STest 1 0 1 1 2 0 2 0", "samples/STest.class");
     }
     
     @Test
-    public void test6() throws IOException {
+    public void testTest5() throws IOException {
         testResultsMatch("Test5 2 1 0 1 3 1 0 0", "samples/Test5.class");
     }
     @Test
-    public void test7() throws IOException {
+    public void testTest4() throws IOException {
         testResultsMatch("Test4 2 1 0 2 5 1 0 0", "samples/Test4.class");
     }
     @Test
-    public void test8() throws IOException {
+    public void testTest3() throws IOException {
         testResultsMatch("Test3 2 1 0 1 4 1 0 0", "samples/Test3.class");
     }
     @Test
-    public void test9() throws IOException {
+    public void testTest2() throws IOException {
         testResultsMatch("Test2 1 1 0 1 2 0 0 0", "samples/Test2.class");
     }
     
