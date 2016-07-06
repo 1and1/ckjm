@@ -34,7 +34,7 @@ public class MetricsFilter {
     /**
      * The parsed command line options.
      */
-    private static CliOptions options;
+    private static CliOptions options = new CliOptions();
 
     /**
      * Return true if the measurements should include calls to the Java JDK into
