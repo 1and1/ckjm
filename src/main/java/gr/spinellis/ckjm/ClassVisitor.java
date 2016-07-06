@@ -26,7 +26,7 @@ import java.lang.reflect.Modifier;
  * @version $Revision: 1.21 $
  * @author <a href="http://www.spinellis.gr">Diomidis Spinellis</a>
  */
-public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
+ class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
     /**
      * The class being visited.
@@ -63,7 +63,7 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
      */
     List<TreeSet<String>> mi = new ArrayList<>();
 
-    public ClassVisitor(JavaClass jc, ClassMetricsContainer classMap) {
+    ClassVisitor(JavaClass jc, ClassMetricsContainer classMap) {
         visitedClass = jc;
         cp = new ConstantPoolGen(visitedClass.getConstantPool());
         cmap = classMap;
@@ -201,7 +201,7 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         if (Modifier.isPublic(method.getModifiers())) {
             cm.incNpm();
         }
-        mi.add(new TreeSet<String>());
+        mi.add(new TreeSet<>());
         MethodVisitor factory = new MethodVisitor(mg, this);
         factory.start();
     }

@@ -31,7 +31,7 @@ import org.kohsuke.args4j.Option;
  *
  * @author Stephan Fuhrmann
  */
-public class CliOptions {
+class CliOptions {
 
     @Option(name = "-p", aliases = {"--only-public"}, usage = "True if the reports should only include public classes.")
     private boolean onlyPublic = false;
