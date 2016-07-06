@@ -1,6 +1,4 @@
 /*
- * $Id: \\dds\\src\\Research\\ckjm.RCS\\src\\gr\\spinellis\\ckjm\\ant\\PrintXmlResults.java,v 1.4 2005/11/05 08:33:18 dds Exp $
- *
  * (C) Copyright 2005 Diomidis Spinellis, Julien Rentrop
  *
  * Permission to use, copy, and distribute this software and its documentation
@@ -14,7 +12,6 @@
  */
 package gr.spinellis.ckjm.output;
 
-import gr.spinellis.ckjm.output.CkjmOutputHandler;
 import gr.spinellis.ckjm.ClassMetrics;
 
 import java.io.PrintStream;

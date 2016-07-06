@@ -1,6 +1,4 @@
 /*
- * $Id: \\dds\\src\\Research\\ckjm.RCS\\src\\gr\\spinellis\\ckjm\\ClassMetrics.java,v 1.12 2007/07/25 12:24:00 dds Exp $
- *
  * (C) Copyright 2005 Diomidis Spinellis
  *
  * Permission to use, copy, and distribute this software and its

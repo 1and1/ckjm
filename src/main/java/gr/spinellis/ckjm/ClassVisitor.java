@@ -1,6 +1,4 @@
 /*
- * $Id: \\dds\\src\\Research\\ckjm.RCS\\src\\gr\\spinellis\\ckjm\\ClassVisitor.java,v 1.21 2012/04/04 13:08:23 dds Exp $
- *
  * (C) Copyright 2005 Diomidis Spinellis
  *
  * Permission to use, copy, and distribute this software and its
@@ -17,10 +15,7 @@ package gr.spinellis.ckjm;
 
 import org.apache.bcel.classfile.*;
 import org.apache.bcel.generic.*;
-import org.apache.bcel.Repository;
 import org.apache.bcel.Constants;
-import org.apache.bcel.util.*;
-import java.io.*;
 import java.util.*;
 import java.lang.reflect.Modifier;
 

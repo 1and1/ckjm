@@ -1,6 +1,4 @@
 /*
- * $Id: \\dds\\src\\Research\\ckjm.RCS\\src\\gr\\spinellis\\ckjm\\ant\\CkjmTask.java,v 1.3 2007/07/25 15:19:09 dds Exp $
- *
  * (C) Copyright 2005 Diomidis Spinellis, Julien Rentrop
  *
  * Permission to use, copy, and distribute this software and its

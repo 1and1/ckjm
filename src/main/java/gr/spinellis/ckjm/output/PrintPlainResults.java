@@ -1,6 +1,4 @@
 /*
- * $Id: \\dds\\src\\Research\\ckjm.RCS\\src\\gr\\spinellis\\ckjm\\PrintPlainResults.java,v 1.1 2005/05/11 20:40:31 dds Exp $
- *
  * (C) Copyright 2005 Diomidis Spinellis, Julien Rentrop
  *
  * Permission to use, copy, and distribute this software and its documentation
