@@ -7,12 +7,17 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  * Test basics.
@@ -32,25 +37,63 @@ Test2 1 1 0 1 2 0 0 0
  */
 public class MetricsFilterTest {
     
-    private Path copyToTemp(String resourceName) throws IOException {
-        InputStream in = getClass().getResourceAsStream(resourceName);
-        Objects.requireNonNull(in, "Resource "+resourceName+" not found");
-        Path path = Files.createTempFile("ckjm", "class");
-        Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
-        return path;
+    static List<String> getTestNames() {
+        return Arrays.asList("Test", "SSTest", "Test7", "Test6", "STest", "Test5", "Test4", "Test3", "Test2");
     }
     
-    private void testResultsMatch(String expected, String resource) throws IOException {
+    @Test
+    public void testTest() throws IOException {
+        testResultsMatch("Test 3 1 1 0 7 1 6 0", "Test");
+    }    
+    @Test
+    public void testTest7() throws IOException {
+        testResultsMatch("Test7 2 1 0 1 3 1 0 1", "Test7");
+    }
+    @Test
+    public void testTest6() throws IOException {
+        testResultsMatch("Test6 2 1 0 1 3 1 0 0", "Test6");
+    }
+    @Test
+    public void testSTest() throws IOException {
+        testResultsMatch("STest 1 0 1 1 2 0 2 0", "STest");
+    }
+    
+    @Test
+    public void testTest5() throws IOException {
+        testResultsMatch("Test5 2 1 0 1 3 1 0 0", "Test5");
+    }
+    @Test
+    public void testTest4() throws IOException {
+        testResultsMatch("Test4 2 1 0 2 5 1 0 0", "Test4");
+    }
+    @Test
+    public void testTest3() throws IOException {
+        testResultsMatch("Test3 2 1 0 1 4 1 0 0", "Test3");
+    }
+
+    @Test
+    public void testTest2() throws IOException {
+        testResultsMatch("Test2 1 1 0 1 2 0 0 0", "Test2");
+    }
+    
+    @BeforeClass
+    public static void parseAll() {
         CapturingOutputHandler capturingOutputHandler = new CapturingOutputHandler();
-        Path resourcePath = copyToTemp(resource);
         
-        MetricsFilter.runMetrics(new String [] {resourcePath.toFile().getAbsolutePath()}, capturingOutputHandler);
-        Optional<ClassMetrics> classMetrics = capturingOutputHandler.getMetrics().values().stream().findFirst();
-        assertTrue(classMetrics.isPresent());
-        
+        String testNames[] = getTestNames().
+            stream().
+            map(f -> (MetricsFilterTest.class.getResource(".")+"samples/"+f+".class").replaceAll("file:", "")).
+            collect(Collectors.toList()).toArray(new String[0]);
+        MetricsFilter.runMetrics(testNames, capturingOutputHandler);
+        allMetrics = capturingOutputHandler.getMetrics();
+    }
+    
+    private static Map<String, ClassMetrics> allMetrics;
+    
+    private void testResultsMatch(String expected, String resource) throws IOException {
+        ClassMetrics classMetrics = allMetrics.get("org.oneandone.ckjm.test.samples."+resource);
         ClassMetrics expectedMetrics = constructFrom(expected);
-        
-        assertEquals(expectedMetrics, classMetrics.get());
+        assertEquals(expectedMetrics, classMetrics);
     }
     
     protected static ClassMetrics constructFrom(String in) {
@@ -71,55 +114,4 @@ public class MetricsFilterTest {
                 Integer.parseInt(parts[8]),
                 true, false);
     }
-    
-    @Test
-    public void testTest() throws IOException {
-        testResultsMatch("Test 3 1 1 0 7 1 6 0", "samples/Test.class");
-    }
-    @Test
-    public void testSSTest() throws IOException {
-        testResultsMatch("SSTest 1 0 0 1 2 0 1 0", "samples/SSTest.class");
-    }
-    @Test
-    public void testTest7() throws IOException {
-        testResultsMatch("Test7 2 1 0 1 3 1 0 1", "samples/Test7.class");
-    }
-    @Test
-    public void testTest6() throws IOException {
-        testResultsMatch("Test6 2 1 0 1 3 1 0 0", "samples/Test6.class");
-    }
-    @Test
-    public void testSTest() throws IOException {
-        testResultsMatch("STest 1 0 1 1 2 0 2 0", "samples/STest.class");
-    }
-    
-    @Test
-    public void testTest5() throws IOException {
-        testResultsMatch("Test5 2 1 0 1 3 1 0 0", "samples/Test5.class");
-    }
-    @Test
-    public void testTest4() throws IOException {
-        testResultsMatch("Test4 2 1 0 2 5 1 0 0", "samples/Test4.class");
-    }
-    @Test
-    public void testTest3() throws IOException {
-        testResultsMatch("Test3 2 1 0 1 4 1 0 0", "samples/Test3.class");
-    }
-
-    @Test
-    public void testTest2() throws IOException {
-        testResultsMatch("Test2 1 1 0 1 2 0 0 0", "samples/Test2.class");
-    }
-    
-/*    
-Test 3 1 1 0 7 1 6 0
-SSTest 1 0 0 1 2 0 1 0
-Test7 2 1 0 1 3 1 0 1
-Test6 2 1 0 1 3 1 0 0
-STest 1 0 1 1 2 0 2 0
-Test5 2 1 0 1 3 1 0 0
-Test4 2 1 0 2 5 1 0 0
-Test3 2 1 0 1 4 1 0 0
-Test2 1 1 0 1 2 0 0 0
-*/
 }
