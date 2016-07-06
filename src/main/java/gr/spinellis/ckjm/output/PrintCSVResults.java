@@ -19,7 +19,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
 /**
- * CSV text output formatter
+ * CSV text output formatter.
  *
  * @author Stephan Fuhrmann
  */
