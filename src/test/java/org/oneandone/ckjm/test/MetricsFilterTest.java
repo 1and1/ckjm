@@ -14,18 +14,7 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 
 /**
- * Test basics.
- * 
- * 
-SSTest 1 0 0 1 2 0 1 0
-Test7 2 1 0 1 3 1 0 1
-Test6 2 1 0 1 3 1 0 0
-STest 1 0 1 1 2 0 2 0
-Test5 2 1 0 1 3 1 0 0
-Test4 2 1 0 2 5 1 0 0
-Test3 2 1 0 1 4 1 0 0
-Test2 1 1 0 1 2 0 0 0
-
+ * Integration test using predefined classes that are processed.
  * 
  * @author Stephan Fuhrmann
  */
