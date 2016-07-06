@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Stores the metrics seen.
+ * Stores the metrics seen in a local map.
  * @author Stephan Fuhrmann
  */
 class CapturingOutputHandler implements CkjmOutputHandler {
