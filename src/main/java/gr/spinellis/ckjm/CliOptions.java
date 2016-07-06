@@ -36,7 +36,7 @@ public class CliOptions {
     @Option(name = "-j", aliases = {"--include-jdk-classes"}, usage = "True if the measurements should include calls to the Java JDK into account.")
     private boolean includeJdkClasses = false;
 
-    @Option(name = "-i", aliases = {"--use-stdin"}, usage = "Read class paths from standard input instead of adding them in the command line arguments.")
+    @Option(name = "-i", aliases = {"--use-stdin"}, usage = "Read class file names from standard input instead of adding them in the command line arguments.")
     private boolean stdIn = false;
 
     @Option(name = "-t", aliases = {"--type"}, usage = "Output format to use.")
