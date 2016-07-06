@@ -1,6 +1,6 @@
 package org.oneandone.ckjm.test;
 
-import gr.spinellis.ckjm.CkjmOutputHandler;
+import gr.spinellis.ckjm.output.CkjmOutputHandler;
 import gr.spinellis.ckjm.ClassMetrics;
 import java.util.HashMap;
 import java.util.Map;

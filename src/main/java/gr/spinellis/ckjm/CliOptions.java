@@ -12,7 +12,10 @@
  */
 package gr.spinellis.ckjm;
 
-import gr.spinellis.ckjm.ant.PrintXmlResults;
+import gr.spinellis.ckjm.output.CkjmOutputHandler;
+import gr.spinellis.ckjm.output.PrintPlainResults;
+import gr.spinellis.ckjm.output.PrintCSVResults;
+import gr.spinellis.ckjm.output.PrintXmlResults;
 import java.io.PrintStream;
 import java.util.Collections;
 import java.util.List;

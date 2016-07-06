@@ -12,8 +12,9 @@
  * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
  * MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-package gr.spinellis.ckjm;
+package gr.spinellis.ckjm.output;
 
+import gr.spinellis.ckjm.ClassMetrics;
 import java.io.PrintStream;
 
 /**
