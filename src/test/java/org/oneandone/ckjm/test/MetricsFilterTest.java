@@ -66,6 +66,7 @@ public class MetricsFilterTest {
     public static void parseAll() {
         CapturingOutputHandler capturingOutputHandler = new CapturingOutputHandler();
         
+        // map class names relative to a place where the class for this file is
         String testNames[] = getTestNames().
             stream().
             map(f -> (MetricsFilterTest.class.getResource(".")+"samples/"+f+".class").replaceAll("file:", "")).
