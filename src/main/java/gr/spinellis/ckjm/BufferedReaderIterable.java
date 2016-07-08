@@ -19,6 +19,8 @@ import java.util.Objects;
 
 /**
  * Iterable iterating over a buffered readers lines.
+ * {@link BufferedReader#close() Closing} of the underlying reader
+ * is in the responsibility of the caller class.
  * @author Stephan Fuhrmann
  */
 public class BufferedReaderIterable implements Iterable<String> {
