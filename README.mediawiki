@@ -28,14 +28,16 @@ Example call:
 Command line options:
 
  -h (--help)                     : Show this help message.
- -i (--use-stdin)                : Read class paths from standard input instead
-                                   of adding them in the command line arguments.
+ -i (--use-stdin)                : Read class file names from standard input
+                                   instead of adding them in the command line
+                                   arguments.
  -j (--include-jdk-classes)      : True if the measurements should include
                                    calls to the Java JDK into account.
+ -k (--keep-going)               : Keep going in case of an error (i.e. class
+                                   format exception).
  -p (--only-public)              : True if the reports should only include
                                    public classes.
  -t (--type) [XML | CSV | PLAIN] : Output format to use.
-
 
 If you use this tool in your research, please cite it as follows.
 Diomidis Spinellis. Tool writing: A forgotten art? ''IEEE Software'', 22(4):9–11, July/August 2005. (doi:10.1109/MS.2005.111). 

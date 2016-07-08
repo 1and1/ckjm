@@ -16,6 +16,7 @@ package gr.spinellis.ckjm;
 import gr.spinellis.ckjm.output.CkjmOutputHandler;
 import org.apache.bcel.classfile.*;
 import java.io.*;
+import java.util.Iterator;
 
 /**
  * Convert a list of classes into their metrics. Process standard input lines or
@@ -50,6 +51,28 @@ public class MetricsFilter {
         return !options.isOnlyPublic();
     }
 
+    /**
+     * Load and parse the specified classes. The class specification can be
+     * either a class file name, or a jarfile, followed by space, followed by a
+     * class file name.
+     */
+    static void processClasses(ClassMetricsContainer cm, Iterable<String> clspecs) {
+        Iterator<String> iterator = clspecs.iterator();
+        while (iterator.hasNext()) {
+            try {
+                String clspec = iterator.next();
+                processClass(cm, clspec);
+            } catch (Throwable t) {
+                if (!options.isKeepGoing()) {
+                    throw t;
+                } else {
+                    t.printStackTrace();
+                }
+            }
+
+        }
+    }
+    
     /**
      * Load and parse the specified class. The class specification can be either
      * a class file name, or a jarfile, followed by space, followed by a class
@@ -113,20 +136,10 @@ public class MetricsFilter {
 
         if (myOptions.isStdIn()) {
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                String s;
-                while ((s = in.readLine()) != null) {
-                    processClass(cm, s);
-                }
-            } catch (Exception e) {
-                System.err.println("Error reading line: " + e);
-                System.exit(1);
-            }
+            processClasses(cm, new BufferedReaderIterable(in));
         }
 
-        for (String file : myOptions.getFiles()) {
-            processClass(cm, file);
-        }
+        processClasses(cm, myOptions.getFiles());
 
         CkjmOutputHandler handler = myOptions.getOutputType().getInstance(System.out
         );

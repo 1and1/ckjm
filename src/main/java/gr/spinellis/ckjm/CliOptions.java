@@ -44,6 +44,10 @@ class CliOptions {
 
     @Option(name = "-t", aliases = {"--type"}, usage = "Output format to use.")
     private OutputType outputType = OutputType.PLAIN;
+    
+    @Option(name = "-k", aliases = {"--keep-going"}, usage = "Keep going in case of an error (i.e. class format exception).")
+    private boolean keepGoing;
+    
 
     @Option(name = "-h", aliases = {"--help"}, usage = "Show this help message.", help = true)
     private boolean help;
@@ -81,6 +85,10 @@ class CliOptions {
 
     public boolean isStdIn() {
         return stdIn;
+    }
+
+    public boolean isKeepGoing() {
+        return keepGoing;
     }
 
     public List<String> getFiles() {
