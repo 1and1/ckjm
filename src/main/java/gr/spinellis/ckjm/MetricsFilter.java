@@ -116,7 +116,10 @@ public class MetricsFilter {
         ClassMetricsContainer cm = new ClassMetricsContainer();
 
         processClasses(cm, Arrays.asList(files));
+
+        outputHandler.printHeader();
         cm.printMetrics(outputHandler);
+        outputHandler.printFooter();
     }
 
     /**
