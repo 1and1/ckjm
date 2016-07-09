@@ -16,6 +16,7 @@ package gr.spinellis.ckjm;
 import gr.spinellis.ckjm.output.CkjmOutputHandler;
 import org.apache.bcel.classfile.*;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -114,9 +115,7 @@ public class MetricsFilter {
     public static void runMetrics(String[] files, CkjmOutputHandler outputHandler) {
         ClassMetricsContainer cm = new ClassMetricsContainer();
 
-        for (int i = 0; i < files.length; i++) {
-            processClass(cm, files[i]);
-        }
+        processClasses(cm, Arrays.asList(files));
         cm.printMetrics(outputHandler);
     }
 
